@@ -22,7 +22,7 @@
             color: #fff;
             padding-top: 30px;
             min-height: 70px;
-            border-bottom: #77aaff 3px solid;
+            border-bottom: #4CAF50 3px solid;
         }
         header a {
             color: #fff;
@@ -59,16 +59,44 @@
         th {
             background-color: #f2f2f2;
         }
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .new-button {
+            background-color: #4CAF50; /* 초록색 배경 */
+            border: none; /* 테두리 없음 */
+            color: white; /* 흰색 텍스트 */
+            padding: 10px 20px; /* 패딩 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+            text-decoration: none; /* 텍스트 밑줄 없음 */
+            display: inline-block; /* 인라인 블록 */
+            font-size: 16px; /* 폰트 크기 */
+            cursor: pointer; /* 커서 포인터 */
+            border-radius: 12px; /* 둥근 모서리 */
+            transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+        }
+
+        .new-button:hover {
+            background-color: #45a049; /* 호버 시 더 어두운 초록색 */
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>구매한 주식 게시판</h1>
+            <h1>Stock Diary</h1>
         </div>
     </header>
     <div class="container main">
-        <h2>주식 목록</h2>
+        <div class="header-row">
+            <h2>주식 목록</h2>
+            <!-- 신규작성 버튼 추가 -->
+            <button class="new-button" onclick="location.href='/stocklist_write'">신규작성</button>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -96,5 +124,6 @@
         </table>
     </div>
 </body>
+
 </html>
 {% endblock %}

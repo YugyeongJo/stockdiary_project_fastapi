@@ -25,3 +25,25 @@ async def stocklist_function(request:Request):
 @router.post("/stocklist", response_class=HTMLResponse) 
 async def stocklist_function(request:Request):
     return templates.TemplateResponse(name="stocklist/stocklist.html", context={'request':request})
+
+#### -------------------------------------------------------------------------------------------------------
+
+# stocklist_write
+@router.get("/stocklist/stocklist_write", response_class=HTMLResponse) 
+async def stocklist_write_function(request:Request):
+    return templates.TemplateResponse(name="stocklist/stocklist_write.html", context={'request':request})
+
+@router.post("/stocklist/stocklist_write", response_class=HTMLResponse) 
+async def stocklist_write_function(request:Request):
+    return templates.TemplateResponse(name="stocklist/stocklist.stocklist_write", context={'request':request})
+
+#### -------------------------------------------------------------------------------------------------------
+
+# stocklist_read
+@router.get("/stocklist/stocklist_read", response_class=HTMLResponse) 
+async def stocklist_read_function(request:Request):
+    return templates.TemplateResponse(name="stocklist/stocklist_read.html", context={'request':request})
+
+@router.post("/stocklist/stocklist_read", response_class=HTMLResponse) 
+async def stocklist_read_function(request:Request):
+    return templates.TemplateResponse(name="stocklist/stocklist.stocklist_read", context={'request':request})
