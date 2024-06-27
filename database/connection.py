@@ -12,7 +12,6 @@ from utils.paginations import Paginations
 
 class Settings(BaseSettings):
     DATABASE_URL: Optional[str] = None
-    db_uri: Optional[str] = None
 
     async def initialize_database(self):
         client = AsyncIOMotorClient(self.DATABASE_URL)
