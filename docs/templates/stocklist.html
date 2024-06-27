@@ -1,0 +1,100 @@
+{% extends "main_template.html"%}
+
+{% block main %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구매한 주식 항목</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        .main {
+            padding: 20px;
+            background: #fff;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>구매한 주식 게시판</h1>
+        </div>
+    </header>
+    <div class="container main">
+        <h2>주식 목록</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>종목명</th>
+                    <th>수량</th>
+                    <th>구매 가격</th>
+                    <th>구매 날짜</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>삼성전자</td>
+                    <td>10</td>
+                    <td>80,000원</td>
+                    <td>2023-01-15</td>
+                </tr>
+                <tr>
+                    <td>카카오</td>
+                    <td>5</td>
+                    <td>120,000원</td>
+                    <td>2023-02-10</td>
+                </tr>
+                <!-- 여기에 더 많은 주식 항목을 추가할 수 있습니다 -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{% endblock %}
