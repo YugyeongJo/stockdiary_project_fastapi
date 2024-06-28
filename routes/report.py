@@ -18,10 +18,10 @@ templates = Jinja2Templates(directory="templates/")
 #### -------------------------------------------------------------------------------------------------------
 
 # report
-@router.get("/report", response_class=HTMLResponse) 
+@router.get("/", response_class=HTMLResponse) 
 async def report_function(request:Request):
-    return templates.TemplateResponse(name="report/report.html", context={'request':request})
+    return templates.TemplateResponse(name="report.html", context={'request':request})
 
-@router.post("/report", response_class=HTMLResponse) 
+@router.post("/", response_class=HTMLResponse) 
 async def report_function(request:Request):
-    return templates.TemplateResponse(name="report/report.html", context={'request':request})
+    return templates.TemplateResponse(name="report.html", context={'request':request})
