@@ -1,4 +1,4 @@
-{
+[
     {
         "date": "2024-06-28",
         "stock_name": "삼성전자",
@@ -179,4 +179,4 @@
         "purchasing_status": "N",
         "selling_status": "Y"
     }
-}
+]
