@@ -1,40 +1,32 @@
-{% extends "main_template.html"%}
+{% extends "main_template.html" %}
 
 {% block main %}
-<h1> 보유주식 현황 </h1>
+<h1 class="my-4">보유주식 현황</h1>
 
-<div>
-    <h2> 국내/해외 주식 비중 </h2>
-    <!-- 원형 차트 삽입 https://developers.google.com/chart/interactive/docs/gallery/piechart?hl=ko -->
-</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="my-4">국내/해외 주식 비중</h2>
+            <!-- 구글 차트가 들어갈 자리 -->
+            <div id="piechart" style="width: 100%; height: 500px;"></div>
+        </div>
+    </div>
 
-<!-- 표차트 https://developers.google.com/chart/interactive/docs/gallery/table?hl=ko -->
-<div>
-    <h2> 국내주식 TOP 5 </h2>
-    <table>
-        <tr>
-            <td>순위</td>
-            <td>이름</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-</div>
+    <div class="row justify-content-center my-4">
+        <div class="col-md-8">
+            <h2 class="my-4">국내주식 TOP 5</h2>
+            <!-- 국내 주식 테이블이 들어갈 자리 -->
+            <div id="domestic_stock_table" style="width: 100%;"></div>
+        </div>
+    </div>
 
-<div>
-    <h2> 해외주식 TOP 5 </h2>
-    <table>
-        <tr>
-            <td>순위</td>
-            <td>이름</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+    <div class="row justify-content-center my-4">
+        <div class="col-md-8">
+            <h2 class="my-4">해외주식 TOP 5</h2>
+            <!-- 해외 주식 테이블이 들어갈 자리 -->
+            <div id="international_stock_table" style="width: 100%;"></div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

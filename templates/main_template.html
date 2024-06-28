@@ -24,6 +24,9 @@
             background-color: #ddd;
             color: black;
         }
+        .content-container {
+            text-align: center; /* 중앙 정렬 */
+        }
     </style>
 </head>
 <body>
@@ -32,9 +35,9 @@
         <a href="/stocklist">Stock List</a>
         <a href="/report">Report</a>
     </div>
-    {% block main %}
-
-
-    {% endblock main %}
+    <div class="content-container">
+        {% block main %}
+        {% endblock main %}
+    </div>
 </body>
 </html>
