@@ -19,14 +19,34 @@ templates = Jinja2Templates(directory="templates/")
 
 # stocklist
 @router.get("/", response_class=HTMLResponse) 
-async def stocklist_function(request:Request):
-    return templates.TemplateResponse(name="stocklist/stocklist.html", context={'request':request})
+async def stocklist_function(
+    request:Request
+    ,page_number: Optional[int] = 1
+    ):
+
+    # DB 불러오기 / 페이지네이션
+    conditions = {}
+    
+    stock_lists, pagination = await collection_stocklist.getsbyconditionswithpagination(
+    conditions, page_number
+    )
+
+    return templates.TemplateResponse(
+        name="stocklist/stocklist.html"
+        , context={'request':request,'stock_lists':stock_lists, 'pagination':pagination})
 
 @router.post("/", response_class=HTMLResponse) 
 async def stocklist_function(
     request:Request
     ,page_number: Optional[int] = 1
     ):
+
+    # 작성부분
+    form_data = await request.form()
+    dict_form_data = dict(form_data)
+
+    stock_list = stocklist(**dict_form_data)
+    await collection_stocklist.save(stock_list)
 
     # DB 불러오기 / 페이지네이션
     conditions = {}
@@ -47,25 +67,23 @@ async def stocklist_write_function(request:Request):
     return templates.TemplateResponse(name="stocklist/stocklist_write.html", context={'request':request})
 
 @router.post("/stocklist_write", response_class=HTMLResponse) 
-async def stocklist_write_function(
-    request:Request
-    ):
-
-    # 작성부분
-    form_data = await request.form()
-    dict_form_data = dict(form_data)
-
-    stock_list = stocklist(**dict_form_data)
-    await collection_stocklist.save(stock_list)
-
+async def stocklist_write_function(request:Request):
     return templates.TemplateResponse(name="stocklist/stocklist_write.html", context={'request':request})
 
 #### -------------------------------------------------------------------------------------------------------
 
 # stocklist_read
-@router.get("/stocklist_read", response_class=HTMLResponse) 
-async def stocklist_read_function(request:Request):
-    return templates.TemplateResponse(name="stocklist/stocklist_read.html", context={'request':request})
+@router.get("/stocklist_read/{object_id}", response_class=HTMLResponse) 
+async def stocklist_read_function(
+    request:Request
+    , object_id:PydanticObjectId
+    ):
+
+    stock_lists = await collection_stocklist.get(object_id)
+
+    return templates.TemplateResponse(
+        name="stocklist/stocklist_read.html"
+        , context={'request':request,'stock_lists':stock_lists})
 
 @router.post("/stocklist_read", response_class=HTMLResponse) 
 async def stocklist_read_function(request:Request):

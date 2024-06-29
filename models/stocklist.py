@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Union
 
 from beanie import Document, Link
 from pydantic import BaseModel, EmailStr
@@ -6,14 +6,14 @@ from datetime import datetime
 
 class stocklist(Document):
     date: Optional[datetime] = None
-    stock_name: Optional[str] = None
-    stock_count: Optional[int] = None
-    stock_amount: Optional[int] = None
-    commission: Optional[int] = None
+    stock_name: Optional[Union[str, int, float, bool]] = None
+    stock_count: Optional[Union[str, int, float, bool]] = None
+    stock_amount: Optional[Union[str, int, float, bool]] = None
+    commission: Optional[Union[str, int, float, bool]] = None
     currency_unit: Optional[str] = None
-    unit_price: Optional[int] = None
-    exchange_rate: Optional[int] = None
-    KRW_conversion: Optional[int] = None
+    unit_price: Optional[Union[str, int, float, bool]] = None
+    exchange_rate: Optional[Union[str, int, float, bool]] = None
+    KRW_conversion: Optional[Union[str, int, float, bool]] = None
     fractional_investment: Optional[str] = None
     automated_investment: Optional[str] = None
     platform: Optional[str] = None

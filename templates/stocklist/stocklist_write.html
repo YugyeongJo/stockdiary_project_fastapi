@@ -84,7 +84,7 @@
 
 <body>
     <h1>신규작성</h1>
-    <form method="POST">
+    <form>
         <div>
             <label for="date">날짜:</label>
             <input type="date" id="date" name="date" required />
@@ -209,7 +209,7 @@
         <hr>
 
         <div class="button-container">
-            <button class="write-button" type="button" onclick="location.href='/stocklist'">작성</button>
+            <button class="write-button" formaction = '/stocklist' formmethod = 'post'>작성</button>
         </div>
     </form>
 </body>
