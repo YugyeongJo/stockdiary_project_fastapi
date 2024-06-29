@@ -23,8 +23,21 @@ async def stocklist_function(request:Request):
     return templates.TemplateResponse(name="stocklist/stocklist.html", context={'request':request})
 
 @router.post("/", response_class=HTMLResponse) 
-async def stocklist_function(request:Request):
-    return templates.TemplateResponse(name="stocklist/stocklist.html", context={'request':request})
+async def stocklist_function(
+    request:Request
+    ,page_number: Optional[int] = 1
+    ):
+
+    # DB 불러오기 / 페이지네이션
+    conditions = {}
+    
+    stock_lists, pagination = await collection_stocklist.getsbyconditionswithpagination(
+    conditions, page_number
+    )
+
+    return templates.TemplateResponse(
+        name="stocklist/stocklist.html"
+        , context={'request':request,'stock_lists':stock_lists, 'pagination':pagination})
 
 #### -------------------------------------------------------------------------------------------------------
 
@@ -34,7 +47,17 @@ async def stocklist_write_function(request:Request):
     return templates.TemplateResponse(name="stocklist/stocklist_write.html", context={'request':request})
 
 @router.post("/stocklist_write", response_class=HTMLResponse) 
-async def stocklist_write_function(request:Request):
+async def stocklist_write_function(
+    request:Request
+    ):
+
+    # 작성부분
+    form_data = await request.form()
+    dict_form_data = dict(form_data)
+
+    stock_list = stocklist(**dict_form_data)
+    await collection_stocklist.save(stock_list)
+
     return templates.TemplateResponse(name="stocklist/stocklist_write.html", context={'request':request})
 
 #### -------------------------------------------------------------------------------------------------------

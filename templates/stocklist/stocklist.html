@@ -1,6 +1,7 @@
 {% extends "main_template.html"%}
 
 {% block main %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +13,13 @@
             margin: 0;
             padding: 0;
         }
+
         .container {
             width: 80%;
             margin: 0 auto;
             overflow: hidden;
         }
+
         header {
             background: #333;
             color: #fff;
@@ -24,41 +27,53 @@
             min-height: 70px;
             border-bottom: #4CAF50 3px solid;
         }
+
         header a {
             color: #fff;
             text-decoration: none;
             text-transform: uppercase;
             font-size: 16px;
         }
+
         header ul {
             padding: 0;
             list-style: none;
         }
+
         header li {
             float: left;
             display: inline;
             padding: 0 20px 0 20px;
         }
+
         .main {
             padding: 20px;
             background: #fff;
             margin-top: 20px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
-        th, td {
+
+        th,
+        td {
             padding: 12px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         .header-row {
             display: flex;
             justify-content: space-between;
@@ -67,24 +82,37 @@
         }
 
         .new-button {
-            background-color: #4CAF50; /* 초록색 배경 */
-            border: none; /* 테두리 없음 */
-            color: white; /* 흰색 텍스트 */
-            padding: 10px 20px; /* 패딩 */
-            text-align: center; /* 텍스트 가운데 정렬 */
-            text-decoration: none; /* 텍스트 밑줄 없음 */
-            display: inline-block; /* 인라인 블록 */
-            font-size: 16px; /* 폰트 크기 */
-            cursor: pointer; /* 커서 포인터 */
-            border-radius: 12px; /* 둥근 모서리 */
-            transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+            background-color: #4CAF50;
+            /* 초록색 배경 */
+            border: none;
+            /* 테두리 없음 */
+            color: white;
+            /* 흰색 텍스트 */
+            padding: 10px 20px;
+            /* 패딩 */
+            text-align: center;
+            /* 텍스트 가운데 정렬 */
+            text-decoration: none;
+            /* 텍스트 밑줄 없음 */
+            display: inline-block;
+            /* 인라인 블록 */
+            font-size: 16px;
+            /* 폰트 크기 */
+            cursor: pointer;
+            /* 커서 포인터 */
+            border-radius: 12px;
+            /* 둥근 모서리 */
+            transition: background-color 0.3s ease;
+            /* 배경색 전환 효과 */
         }
 
         .new-button:hover {
-            background-color: #45a049; /* 호버 시 더 어두운 초록색 */
+            background-color: #45a049;
+            /* 호버 시 더 어두운 초록색 */
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -100,26 +128,25 @@
         <table>
             <thead>
                 <tr>
+                    <th>번호</th>
                     <th>종목명</th>
                     <th>수량</th>
                     <th>구매 가격</th>
                     <th>구매 날짜</th>
+                    <th>자세히보기</th>
                 </tr>
             </thead>
             <tbody>
+                {% for stock_list in stock_lists %}
                 <tr>
-                    <td>삼성전자</td>
-                    <td>10</td>
-                    <td>80,000원</td>
-                    <td>2023-01-15</td>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ stock_list.stock_name }}</td>
+                    <td>{{ stock_list.stock_count }}</td>
+                    <td>{{ stock_list.stock_amount }}</td>
+                    <td>{{ stock_list.date }}</td>
+                    <td><button>보기</button></td>
                 </tr>
-                <tr>
-                    <td>카카오</td>
-                    <td>5</td>
-                    <td>120,000원</td>
-                    <td>2023-02-10</td>
-                </tr>
-                <!-- 여기에 더 많은 주식 항목을 추가할 수 있습니다 -->
+                {% endfor %}
             </tbody>
         </table>
     </div>
