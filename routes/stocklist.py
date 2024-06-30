@@ -40,13 +40,25 @@ async def stocklist_function(
     request:Request
     ,page_number: Optional[int] = 1
     ):
-
-    # 작성부분
+    
     form_data = await request.form()
     dict_form_data = dict(form_data)
-
+    btn_type = dict_form_data['btn_type']
+    dict_id = dict_form_data['id']
+    dict_form_data.pop('btn_type')
+    dict_form_data.pop('id')
     stock_list = stocklist(**dict_form_data)
-    await collection_stocklist.save(stock_list)
+    
+    # 작성부분
+    if btn_type == 'write':
+        await collection_stocklist.save(stock_list)
+    
+    elif btn_type == 'update':
+        await collection_stocklist.update_one(dict_id,dict_form_data)
+        
+    elif btn_type == 'delete':
+        await collection_stocklist.delete_one(dict_id)
+    
 
     # DB 불러오기 / 페이지네이션
     conditions = {}
@@ -54,6 +66,10 @@ async def stocklist_function(
     stock_lists, pagination = await collection_stocklist.getsbyconditionswithpagination(
     conditions, page_number
     )
+    
+    # 삭제하기
+    
+    
 
     return templates.TemplateResponse(
         name="stocklist/stocklist.html"
@@ -83,7 +99,7 @@ async def stocklist_read_function(
 
     return templates.TemplateResponse(
         name="stocklist/stocklist_read.html"
-        , context={'request':request,'stock_lists':stock_lists})
+        , context={'request':request,'stock_list':stock_lists})
 
 @router.post("/stocklist_read", response_class=HTMLResponse) 
 async def stocklist_read_function(request:Request):

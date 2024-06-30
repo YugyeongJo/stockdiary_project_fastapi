@@ -28,5 +28,26 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
 
+  function drawChart() {
+    var dict_count = JSON.parse('{{dict_amount | tojson | safe }}');
+    var data = google.visualization.arrayToDataTable([
+      ['시장(국가)', '비중'],
+      ['국내', dict_count['국내']],
+      ['해외', dict_count['해외']],
+    ]);
+
+    var options = {
+      title: '국내/해외 주식 비중'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+  }
+</script>
 {% endblock %}

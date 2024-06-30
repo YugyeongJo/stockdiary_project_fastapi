@@ -104,29 +104,30 @@
 <body>
     <h1>신규작성</h1>
     <form method="POST">
+        <input type="hidden" id="id" name="id" value={{stock_list.id}} />
         <div>
-            <label for="date">날짜:</label>
-            <input type="date" id="date" name="date" required />
+            <label for="date">날짜: </label>
+            <input type="date" id="date" name="date" value={{stock_list.date}} />
         </div>
 
         <div>
             <label for="stock_name">종목:</label>
-            <input type="text" id="stock_name" name="stock_name" placeholder="종목 입력" />
+            <input type="text" id="stock_name" name="stock_name" value={{stock_list.stock_name}} />
         </div>
 
         <div>
             <label for="stock_count">구매 주식수:</label>
-            <input type="number" id="stock_count" name="stock_count" placeholder="숫자만 입력" />
+            <input type="number" id="stock_count" name="stock_count" value={{stock_list.stock_count}} />
         </div>
 
         <div>
             <label for="stock_amount">구매 금액:</label>
-            <input type="number" id="stock_amount" name="stock_amount" placeholder="숫자만 입력" />
+            <input type="number" id="stock_amount" name="stock_amount" value={{stock_list.stock_amount}} />
         </div>
 
         <div>
             <label for="commission">수수료:</label>
-            <input type="number" id="commission" name="commission" placeholder="숫자만 입력" />
+            <input type="number" id="commission" name="commission" value={{stock_list.commission}} />
         </div>
 
         <div>
@@ -143,17 +144,17 @@
 
         <div>
             <label for="unit_price">1주당 체결가:</label>
-            <input type="number" id="unit_price" name="unit_price" placeholder="숫자만 입력" />
+            <input type="number" id="unit_price" name="unit_price" value={{stock_list.unit_price}} />
         </div>
 
         <div>
             <label for="exchange_rate">적용환율:</label>
-            <input type="number" id="exchange_rate" name="exchange_rate" placeholder="숫자만 입력" />
+            <input type="number" id="exchange_rate" name="exchange_rate" value={{stock_list.exchange_rate}} />
         </div>
 
         <div>
             <label for="KRW_conversion">원화환산:</label>
-            <input type="number" id="KRW_conversion" name="KRW_conversion" placeholder="숫자만 입력" />
+            <input type="number" id="KRW_conversion" name="KRW_conversion" value={{stock_list.KRW_conversion}} />
         </div>
 
         <div>
@@ -229,8 +230,8 @@
 
 
         <div class="button-container">
-            <button class="edit-button" onclick="location.href='/stocklist'">수정</button>
-            <button class="delete-button" onclick="location.href='/stocklist'">삭제</button>
+            <button class="edit-button" formaction='/stocklist' name="btn_type" value="update">수정</button>
+            <button class="delete-button" formaction='/stocklist' name="btn_type" value="delete">삭제</button>
         </div>
     </form>
 </body>

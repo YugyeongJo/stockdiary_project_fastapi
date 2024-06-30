@@ -20,6 +20,9 @@ templates = Jinja2Templates(directory="templates/")
 # report
 @router.get("/", response_class=HTMLResponse) 
 async def report_function(request:Request):
+        # DB 불러오기 / 페이지네이션
+    
+    stock_lists = await collection_stocklist.get_all()
     return templates.TemplateResponse(name="report.html", context={'request':request})
 
 @router.post("/", response_class=HTMLResponse) 

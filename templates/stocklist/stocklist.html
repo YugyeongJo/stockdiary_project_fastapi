@@ -167,18 +167,20 @@
                 </tr>
             </thead>
             <tbody>
-                {% if stock_lists %}
-                    {% for stock_list in stock_lists %}
-                    <tr>
-                        <td>{{ loop.index }}</td>
-                        <td>{{ stock_list.stock_name }}</td>
-                        <td>{{ stock_list.stock_count }}</td>
-                        <td>{{ stock_list.stock_amount }}</td>
-                        <td>{{ stock_list.date.date() }}</td>
-                        <td><button class="read-button" formaction='/stocklist/stocklist_read/{{ stock_list.id }}'>보기</button></td>
-                    </tr>
-                    {% endfor %}
-                {% else %}
+                <form>
+                    {% if stock_lists %}
+                        {% for stock_list in stock_lists %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ stock_list.stock_name }}</td>
+                            <td>{{ stock_list.stock_count }}</td>
+                            <td>{{ stock_list.stock_amount }}</td>
+                            <td>{{ stock_list.date.date() }}</td>
+                            <td><button class="read-button" formaction='/stocklist/stocklist_read/{{ stock_list.id }}'>보기</button></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                </form>
                     <tr>
                         <td colspan="6" style="text-align: center;">Not have stock</td>
                     </tr>

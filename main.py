@@ -10,6 +10,9 @@ async def init_db():
 
 from routes.stocklist import router as stocklist_router
 from routes.report import router as report_router
+from database.connection import Database
+from models.stocklist import stocklist
+collection_stocklist = Database(stocklist)
 
 from fastapi import Request
 from fastapi.templating import Jinja2Templates
@@ -34,7 +37,18 @@ app.mount("/data/img", StaticFiles(directory="data/img/"), name="static_img")
 
 @app.get("/")
 async def root(Request:Request):
-    return templates.TemplateResponse("main.html",{'request':Request})
+    stock_lists = await collection_stocklist.get_all()
+    chart_lists = list(stock_lists)
+    dict_count = {'국내':0,'해외':0}
+    dict_amount = {'국내':0,'해외':0}
+    for i in chart_lists:
+        if i.dict()['investment_country'] == '국내':
+            dict_count['국내'] += 1
+            dict_amount['국내'] +=  int(i.dict()['unit_price'])*int(i.dict()['stock_amount'])
+        else:
+             dict_count['해외'] += 1
+             dict_amount['해외'] +=  int(i.dict()['unit_price'])*int(i.dict()['stock_amount'])
+    return templates.TemplateResponse("main.html",{'request':Request, 'dict_count':dict_count,'dict_amount':dict_amount})
 
 
 @app.post("/")
