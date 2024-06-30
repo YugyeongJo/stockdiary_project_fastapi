@@ -12,6 +12,7 @@
     h1 {
         text-align: center;
         margin-top: 70px;
+        padding-bottom: 20px;
     }
 
     form {
@@ -82,135 +83,140 @@
     }
 </style>
 
-<body>
-    <h1>신규작성</h1>
-    <form>
-        <div>
-            <label for="date">날짜:</label>
-            <input type="date" id="date" name="date" required />
-        </div>
+<form>
+    <h1 class="my-4">신규작성</h1>
 
-        <div>
-            <label for="stock_name">종목:</label>
-            <input type="text" id="stock_name" name="stock_name" placeholder="종목 입력" />
-        </div>
+    <div>
+        <label for="date">날짜:</label>
+        <input type="date" id="date" name="date" required />
+    </div>
 
-        <div>
-            <label for="stock_count">구매 주식수:</label>
-            <input type="number" id="stock_count" name="stock_count" placeholder="숫자만 입력" />
-        </div>
+    <div>
+        <label for="stock_name">종목:</label>
+        <input type="text" id="stock_name" name="stock_name" placeholder="종목 입력" />
+    </div>
 
-        <div>
-            <label for="stock_amount">구매 금액:</label>
-            <input type="number" id="stock_amount" name="stock_amount" placeholder="숫자만 입력" />
-        </div>
+    <div>
+        <label for="stock_count">구매 주식수:</label>
+        <input type="number" id="stock_count" name="stock_count" placeholder="숫자만 입력" />
+    </div>
 
-        <div>
-            <label for="commission">수수료:</label>
-            <input type="number" id="commission" name="commission" placeholder="숫자만 입력" />
-        </div>
+    <div>
+        <label for="stock_amount">구매 금액:</label>
+        <input type="number" id="stock_amount" name="stock_amount" placeholder="숫자만 입력" />
+    </div>
 
-        <div>
-            <label for="currency_unit">단위:</label>
-            <select id="currency_unit" name="currency_unit">
-                <option value="NONE" selected disabled>통화단위 선택</option>
-                <option value="KRW">KRW</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="JPY">JPY</option>
-                <option value="CNY">CNY</option>
-            </select>
-        </div>
+    <div>
+        <label for="commission">수수료:</label>
+        <input type="number" id="commission" name="commission" placeholder="숫자만 입력" />
+    </div>
 
-        <div>
-            <label for="unit_price">1주당 체결가:</label>
-            <input type="number" id="unit_price" name="unit_price" placeholder="숫자만 입력" />
-        </div>
+    <div>
+        <label for="currency_unit">단위:</label>
+        <select id="currency_unit" name="currency_unit">
+            <option value="NONE" selected disabled>통화단위 선택</option>
+            <option value="KRW">KRW</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="JPY">JPY</option>
+            <option value="CNY">CNY</option>
+        </select>
+    </div>
 
-        <div>
-            <label for="exchange_rate">적용환율:</label>
-            <input type="number" id="exchange_rate" name="exchange_rate" placeholder="숫자만 입력" />
-        </div>
+    <div>
+        <label for="unit_price">1주당 체결가:</label>
+        <input type="number" id="unit_price" name="unit_price" placeholder="숫자만 입력" />
+    </div>
 
-        <div>
-            <label for="KRW_conversion">원화환산:</label>
-            <input type="number" id="KRW_conversion" name="KRW_conversion" placeholder="숫자만 입력" />
-        </div>
+    <div>
+        <label for="exchange_rate">적용환율:</label>
+        <input type="number" id="exchange_rate" name="exchange_rate" placeholder="숫자만 입력" step="0.01" />
+    </div>
 
-        <div>
-            <label for="fractional_investment">소수점 투자 여부:</label>
-            <div class="radio-group">
-                <input type="radio" id="fractional_investment_yes" name="fractional_investment" value="Y">
-                <label for="fractional_investment_yes">Yes</label>
-                <input type="radio" id="fractional_investment_no" name="fractional_investment" value="N">
-                <label for="fractional_investment_no">No</label>
-            </div>
-        </div>
+    <div>
+        <label for="KRW_conversion">원화환산:</label>
+        <input type="number" id="KRW_conversion" name="KRW_conversion" placeholder="숫자만 입력" />
+    </div>
 
-        <div>
-            <label for="automated_investment">자동투자 여부:</label>
-            <div class="radio-group">
-                <input type="radio" id="automated_investment_yes" name="automated_investment" value="Y">
-                <label for="automated_investment_yes">Yes</label>
-                <input type="radio" id="automated_investment_no" name="automated_investment" value="N">
-                <label for="automated_investment_no">No</label>
-            </div>
+    <div>
+        <label for="fractional_investment">소수점 투자 여부:</label>
+        <div class="radio-group">
+            <input type="radio" id="fractional_investment_yes" name="fractional_investment" value="Y">
+            <label for="fractional_investment_yes">Yes</label>
+            <input type="radio" id="fractional_investment_no" name="fractional_investment" value="N">
+            <label for="fractional_investment_no">No</label>
         </div>
+    </div>
 
-        <div>
-            <label for="platform">사용플랫폼:</label>
-            <select id="platform" name="platform">
-                <option value="mini stack">mini stack</option>
-                <option value="platform2">플랫폼 2</option>
-                <option value="platform3">플랫폼 3</option>
-            </select>
+    <div>
+        <label for="automated_investment">자동투자 여부:</label>
+        <div class="radio-group">
+            <input type="radio" id="automated_investment_yes" name="automated_investment" value="Y">
+            <label for="automated_investment_yes">Yes</label>
+            <input type="radio" id="automated_investment_no" name="automated_investment" value="N">
+            <label for="automated_investment_no">No</label>
         </div>
+    </div>
 
-        <div>
-            <label for="investment_country">시장(국가):</label>
-            <select id="investment_country" name="investment_country">
-                <option value="NONE" selected disabled>시장(국가) 선택</option>
-                <option value="국내">국내</option>
-                <option value="미국">미국</option>
-                <option value="country3">국가 3</option>
-            </select>
+    <div>
+        <label for="platform">사용플랫폼:</label>
+        <select id="platform" name="platform">
+            <option value="mini stack">mini stack</option>
+            <option value="platform2">플랫폼 2</option>
+            <option value="platform3">플랫폼 3</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="investment_country">시장(국가):</label>
+        <select id="investment_country" name="investment_country">
+            <option value="NONE" selected disabled>시장(국가) 선택</option>
+            <option value="국내">국내</option>
+            <option value="미국">미국</option>
+            <option value="country3">국가 3</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="account_type">계좌 종류:</label>
+        <select id="account_type" name="account_type">
+            <option value="NONE" selected disabled>계좌종류 선택</option>
+            <option value="일반">일반</option>
+            <option value="type2">계좌 종류 2</option>
+            <option value="type3">계좌 종류 3</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="purchasing_status">구매 여부:</label>
+        <div class="radio-group">
+            <input type="radio" id="purchasing_status_yes" name="purchasing_status" value="Y">
+            <label for="purchasing_status_yes">Yes</label>
+            <input type="radio" id="purchasing_status_no" name="purchasing_status" value="N">
+            <label for="purchasing_status_no">No</label>
         </div>
+    </div>
 
-        <div>
-            <label for="account_type">계좌 종류:</label>
-            <select id="account_type" name="account_type">
-                <option value="NONE" selected disabled>계좌종류 선택</option>
-                <option value="일반">일반</option>
-                <option value="type2">계좌 종류 2</option>
-                <option value="type3">계좌 종류 3</option>
-            </select>
+    <div>
+        <label for="selling_status">판매 여부:</label>
+        <div class="radio-group">
+            <input type="radio" id="selling_status_yes" name="selling_status" value="Y">
+            <label for="selling_status_yes">Yes</label>
+            <input type="radio" id="selling_status_no" name="selling_status" value="N">
+            <label for="selling_status_no">No</label>
         </div>
+    </div>
 
-        <div>
-            <label for="purchasing_status">구매 여부:</label>
-            <div class="radio-group">
-                <input type="radio" id="purchasing_status_yes" name="purchasing_status" value="Y">
-                <label for="purchasing_status_yes">Yes</label>
-                <input type="radio" id="purchasing_status_no" name="purchasing_status" value="N">
-                <label for="purchasing_status_no">No</label>
-            </div>
-        </div>
+    <div>
+        <label for="stock_memo">memo:</label>
+        <textarea id="stock_memo" name="stock_memo" rows="4" cols="50" placeholder="주식 구매 이유를 memo하세요"></textarea>
+    </div>
 
-        <div>
-            <label for="selling_status">판매 여부:</label>
-            <div class="radio-group">
-                <input type="radio" id="selling_status_yes" name="selling_status" value="Y">
-                <label for="selling_status_yes">Yes</label>
-                <input type="radio" id="selling_status_no" name="selling_status" value="N">
-                <label for="selling_status_no">No</label>
-            </div>
-        </div>
+    <hr>
 
-        <hr>
+    <div class="button-container">
+        <button class="write-button" formaction='/stocklist' formmethod='post' name="btn_type" value="write">작성</button>
+    </div>
+</form>
 
-        <div class="button-container">
-            <button class="write-button" formaction = '/stocklist' formmethod = 'post'  name="btn_type" value="write">작성</button>
-        </div>
-    </form>
-</body>
 {% endblock %}

@@ -11,7 +11,8 @@
 
     h1 {
         text-align: center;
-        margin-top: 70px;
+        margin-top: 30px;
+        padding-bottom: 20px;
     }
 
     form {
@@ -102,67 +103,68 @@
 </style>
 
 <body>
-    <h1>신규작성</h1>
     <form method="POST">
-        <input type="hidden" id="id" name="id" value={{stock_list.id}} />
+        <h1>상세조회</h1>
+
+        <input type="hidden" id="id" name="id" value="{{ stock_list.id }}" />
         <div>
             <label for="date">날짜: </label>
-            <input type="date" id="date" name="date" value={{stock_list.date}} />
+            <input type="date" id="date" name="date" value="{{ stock_list.date.strftime('%Y-%m-%d') }}" />
         </div>
 
         <div>
             <label for="stock_name">종목:</label>
-            <input type="text" id="stock_name" name="stock_name" value={{stock_list.stock_name}} />
+            <input type="text" id="stock_name" name="stock_name" value="{{ stock_list.stock_name }}" />
         </div>
 
         <div>
             <label for="stock_count">구매 주식수:</label>
-            <input type="number" id="stock_count" name="stock_count" value={{stock_list.stock_count}} />
+            <input type="number" id="stock_count" name="stock_count" value="{{ stock_list.stock_count }}" />
         </div>
 
         <div>
             <label for="stock_amount">구매 금액:</label>
-            <input type="number" id="stock_amount" name="stock_amount" value={{stock_list.stock_amount}} />
+            <input type="number" id="stock_amount" name="stock_amount" value="{{ stock_list.stock_amount }}" />
         </div>
 
         <div>
             <label for="commission">수수료:</label>
-            <input type="number" id="commission" name="commission" value={{stock_list.commission}} />
+            <input type="number" id="commission" name="commission" value="{{ stock_list.commission }}" />
         </div>
 
         <div>
             <label for="currency_unit">단위:</label>
             <select id="currency_unit" name="currency_unit">
-                <option value="NONE" selected disabled>통화단위 선택</option>
-                <option value="KRW">KRW</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="JPY">JPY</option>
-                <option value="CNY">CNY</option>
+                <option value="NONE" disabled {{ 'selected' if stock_list.currency_unit is none }}>통화단위 선택</option>
+                <option value="KRW" {{ 'selected' if stock_list.currency_unit == 'KRW' }}>KRW</option>
+                <option value="USD" {{ 'selected' if stock_list.currency_unit == 'USD' }}>USD</option>
+                <option value="EUR" {{ 'selected' if stock_list.currency_unit == 'EUR' }}>EUR</option>
+                <option value="JPY" {{ 'selected' if stock_list.currency_unit == 'JPY' }}>JPY</option>
+                <option value="CNY" {{ 'selected' if stock_list.currency_unit == 'CNY' }}>CNY</option>
             </select>
         </div>
 
         <div>
             <label for="unit_price">1주당 체결가:</label>
-            <input type="number" id="unit_price" name="unit_price" value={{stock_list.unit_price}} />
+            <input type="number" id="unit_price" name="unit_price" value="{{ stock_list.unit_price }}" />
         </div>
 
         <div>
             <label for="exchange_rate">적용환율:</label>
-            <input type="number" id="exchange_rate" name="exchange_rate" value={{stock_list.exchange_rate}} />
+            <input type="number" id="exchange_rate" name="exchange_rate" value="{{ stock_list.exchange_rate }}" />
         </div>
 
         <div>
             <label for="KRW_conversion">원화환산:</label>
-            <input type="number" id="KRW_conversion" name="KRW_conversion" value={{stock_list.KRW_conversion}} />
+            <input type="number" id="KRW_conversion" name="KRW_conversion" value="{{ stock_list.KRW_conversion }}" />
         </div>
 
         <div>
             <label for="fractional_investment">소수점 투자 여부:</label>
             <div class="radio-group">
-                <input type="radio" id="fractional_investment_yes" name="fractional_investment" value="Y">
+                <input type="radio" id="fractional_investment_yes" name="fractional_investment" value="Y" {{ 'checked' if stock_list.fractional_investment == 'Y' }}>
                 <label for="fractional_investment_yes">Yes</label>
-                <input type="radio" id="fractional_investment_no" name="fractional_investment" value="N">
+                <input type="radio" id="fractional_investment_no" name="fractional_investment" value="N" {{ 'checked' if stock_list.fractional_investment == 'N' }}>
                 <label for="fractional_investment_no">No</label>
             </div>
         </div>
@@ -170,9 +172,9 @@
         <div>
             <label for="automated_investment">자동투자 여부:</label>
             <div class="radio-group">
-                <input type="radio" id="automated_investment_yes" name="automated_investment" value="Y">
+                <input type="radio" id="automated_investment_yes" name="automated_investment" value="Y" {{ 'checked' if stock_list.automated_investment == 'Y' }}>
                 <label for="automated_investment_yes">Yes</label>
-                <input type="radio" id="automated_investment_no" name="automated_investment" value="N">
+                <input type="radio" id="automated_investment_no" name="automated_investment" value="N" {{ 'checked' if stock_list.automated_investment == 'N' }}>
                 <label for="automated_investment_no">No</label>
             </div>
         </div>
@@ -180,38 +182,38 @@
         <div>
             <label for="platform">사용플랫폼:</label>
             <select id="platform" name="platform">
-                <option value="mini stack">mini stack</option>
-                <option value="platform2">플랫폼 2</option>
-                <option value="platform3">플랫폼 3</option>
+                <option value="mini stack" {{ 'selected' if stock_list.platform == 'mini stack' }}>mini stack</option>
+                <option value="platform2" {{ 'selected' if stock_list.platform == 'platform2' }}>플랫폼 2</option>
+                <option value="platform3" {{ 'selected' if stock_list.platform == 'platform3' }}>플랫폼 3</option>
             </select>
         </div>
 
         <div>
             <label for="investment_country">시장(국가):</label>
             <select id="investment_country" name="investment_country">
-                <option value="NONE" selected disabled>시장(국가) 선택</option>
-                <option value="국내">국내</option>
-                <option value="미국">미국</option>
-                <option value="country3">국가 3</option>
+                <option value="NONE" disabled {{ 'selected' if stock_list.investment_country is none }}>시장(국가) 선택</option>
+                <option value="국내" {{ 'selected' if stock_list.investment_country == '국내' }}>국내</option>
+                <option value="미국" {{ 'selected' if stock_list.investment_country == '미국' }}>미국</option>
+                <option value="country3" {{ 'selected' if stock_list.investment_country == 'country3' }}>국가 3</option>
             </select>
         </div>
 
         <div>
             <label for="account_type">계좌 종류:</label>
             <select id="account_type" name="account_type">
-                <option value="NONE" selected disabled>계좌종류 선택</option>
-                <option value="일반">일반</option>
-                <option value="type2">계좌 종류 2</option>
-                <option value="type3">계좌 종류 3</option>
+                <option value="NONE" disabled {{ 'selected' if stock_list.account_type is none }}>계좌종류 선택</option>
+                <option value="일반" {{ 'selected' if stock_list.account_type == '일반' }}>일반</option>
+                <option value="type2" {{ 'selected' if stock_list.account_type == 'type2' }}>계좌 종류 2</option>
+                <option value="type3" {{ 'selected' if stock_list.account_type == 'type3' }}>계좌 종류 3</option>
             </select>
         </div>
 
         <div>
             <label for="purchasing_status">구매 여부:</label>
             <div class="radio-group">
-                <input type="radio" id="purchasing_status_yes" name="purchasing_status" value="Y">
+                <input type="radio" id="purchasing_status_yes" name="purchasing_status" value="Y" {{ 'checked' if stock_list.purchasing_status == 'Y' }}>
                 <label for="purchasing_status_yes">Yes</label>
-                <input type="radio" id="purchasing_status_no" name="purchasing_status" value="N">
+                <input type="radio" id="purchasing_status_no" name="purchasing_status" value="N" {{ 'checked' if stock_list.purchasing_status == 'N' }}>
                 <label for="purchasing_status_no">No</label>
             </div>
         </div>
@@ -219,15 +221,19 @@
         <div>
             <label for="selling_status">판매 여부:</label>
             <div class="radio-group">
-                <input type="radio" id="selling_status_yes" name="selling_status" value="Y">
+                <input type="radio" id="selling_status_yes" name="selling_status" value="Y" {{ 'checked' if stock_list.selling_status == 'Y' }}>
                 <label for="selling_status_yes">Yes</label>
-                <input type="radio" id="selling_status_no" name="selling_status" value="N">
+                <input type="radio" id="selling_status_no" name="selling_status" value="N" {{ 'checked' if stock_list.selling_status == 'N' }}>
                 <label for="selling_status_no">No</label>
             </div>
         </div>
 
-        <hr>
+        <div>
+            <label for="stock_memo">memo:</label>
+            <textarea id="stock_memo" name="stock_memo" rows="4" cols="50">{{ stock_list.stock_memo }}</textarea>
+        </div>
 
+        <hr>
 
         <div class="button-container">
             <button class="edit-button" formaction='/stocklist' name="btn_type" value="update">수정</button>

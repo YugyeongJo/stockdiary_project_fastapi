@@ -1,36 +1,94 @@
 {% extends "main_template.html" %}
 
 {% block main %}
+<style>
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  h1 {
+    font-family: 'Nanum Gothic', sans-serif;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-family: 'Gothic A1', sans-serif;
+  }
+  table {
+    font-family: 'Spoqa Han Sans', sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  table, th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 8px;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .container {
+    display: flex;
+    gap: 20px;
+  }
+  .chart-container, .table-container {
+    flex: 1;
+  }
+</style>
+
 <h1 class="my-4">보유주식 현황</h1>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h2 class="my-4">국내/해외 주식 비중</h2>
-            <!-- 구글 차트가 들어갈 자리 -->
-            <div id="piechart" style="width: 100%; height: 500px;"></div>
-        </div>
-    </div>
+  <div class="chart-container">
+    <h2> 국내 / 해외 주식 비중 </h2>
+    <div id="piechart" style="width: 100%; height: 500px;"></div>
+  </div>
 
-    <div class="row justify-content-center my-4">
-        <div class="col-md-8">
-            <h2 class="my-4">국내주식 TOP 5</h2>
-            <!-- 국내 주식 테이블이 들어갈 자리 -->
-            <div id="domestic_stock_table" style="width: 100%;"></div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center my-4">
-        <div class="col-md-8">
-            <h2 class="my-4">해외주식 TOP 5</h2>
-            <!-- 해외 주식 테이블이 들어갈 자리 -->
-            <div id="international_stock_table" style="width: 100%;"></div>
-        </div>
-    </div>
+  <div class="table-container">
+    <h2 class="my-4">국내주식 TOP 5</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>순위</th>
+          <th>주식명</th>
+          <th>보유수량</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rank, stock_name, stock_count in top_domestic %}
+        <tr>
+          <td>{{ rank }}</td>
+          <td>{{ stock_name }}</td>
+          <td>{{ stock_count }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h2 class="my-4">해외주식 TOP 5</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>순위</th>
+          <th>주식명</th>
+          <th>보유수량</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rank, stock_name, stock_count in top_overseas %}
+        <tr>
+          <td>{{ rank }}</td>
+          <td>{{ stock_name }}</td>
+          <td>{{ stock_count }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-  google.charts.load('current', {'packages':['corechart']});
+  google.charts.load('current', { 'packages': ['corechart'] });
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
@@ -42,7 +100,39 @@
     ]);
 
     var options = {
-      title: '국내/해외 주식 비중'
+      title: '국내/해외 주식 비중',
+      titleTextStyle: {
+        fontSize: 24,
+        bold: true,
+        color: '#333'
+      },
+      pieHole: 0.4,
+      slices: {
+        0: { color: '#6fbfdf' },
+        1: { color: '#ffb78c' }
+      },
+      legend: {
+        position: 'bottom',
+        alignment: 'center',
+        textStyle: {
+          fontSize: 14,
+          color: '#333'
+        }
+      },
+      chartArea: {
+        left: 20,
+        top: 20,
+        width: '100%',
+        height: '80%'
+      },
+      tooltip: {
+        textStyle: {
+          fontSize: 12
+        }
+      },
+      backgroundColor: {
+        fill: 'transparent'
+      }
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));

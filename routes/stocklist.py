@@ -18,6 +18,7 @@ templates = Jinja2Templates(directory="templates/")
 #### -------------------------------------------------------------------------------------------------------
 
 # stocklist
+# @router.get("/{page_number}")
 @router.get("/", response_class=HTMLResponse) 
 async def stocklist_function(
     request:Request
@@ -35,45 +36,45 @@ async def stocklist_function(
         name="stocklist/stocklist.html"
         , context={'request':request,'stock_lists':stock_lists, 'pagination':pagination})
 
-@router.post("/", response_class=HTMLResponse) 
+@router.post("/", response_class=HTMLResponse)
 async def stocklist_function(
-    request:Request
-    ,page_number: Optional[int] = 1
-    ):
-    
+    request: Request,
+    page_number: Optional[int] = 1
+):
     form_data = await request.form()
     dict_form_data = dict(form_data)
     btn_type = dict_form_data['btn_type']
-    dict_id = dict_form_data['id']
-    dict_form_data.pop('btn_type')
-    dict_form_data.pop('id')
-    stock_list = stocklist(**dict_form_data)
     
-    # 작성부분
     if btn_type == 'write':
+        # id 필드가 없어도 처리
+        dict_form_data.pop('btn_type')
+        stock_list = stocklist(**dict_form_data)
         await collection_stocklist.save(stock_list)
-    
-    elif btn_type == 'update':
-        await collection_stocklist.update_one(dict_id,dict_form_data)
+    else:
+        # id 필드가 필요한 경우 처리
+        if 'id' not in dict_form_data:
+            return HTMLResponse(content="id is required for update and delete operations", status_code=400)
         
-    elif btn_type == 'delete':
-        await collection_stocklist.delete_one(dict_id)
-    
+        dict_id = dict_form_data['id']
+        dict_form_data.pop('btn_type')
+        dict_form_data.pop('id')
+        stock_list = stocklist(**dict_form_data)
+
+        if btn_type == 'update':
+            await collection_stocklist.update_one(dict_id, dict_form_data)
+        elif btn_type == 'delete':
+            await collection_stocklist.delete_one(dict_id)
 
     # DB 불러오기 / 페이지네이션
     conditions = {}
-    
     stock_lists, pagination = await collection_stocklist.getsbyconditionswithpagination(
-    conditions, page_number
+        conditions, page_number
     )
-    
-    # 삭제하기
-    
-    
 
     return templates.TemplateResponse(
-        name="stocklist/stocklist.html"
-        , context={'request':request,'stock_lists':stock_lists, 'pagination':pagination})
+        name="stocklist/stocklist.html",
+        context={'request': request, 'stock_lists': stock_lists, 'pagination': pagination}
+    )
 
 #### -------------------------------------------------------------------------------------------------------
 

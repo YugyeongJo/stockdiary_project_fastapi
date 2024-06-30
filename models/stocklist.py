@@ -21,6 +21,7 @@ class stocklist(Document):
     account_type: Optional[str] = None
     purchasing_status: Optional[str] = None
     selling_status: Optional[str] = None
+    stock_memo: Optional[str] = None
     
     class Settings:
         name = "stocklist"
