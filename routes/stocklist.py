@@ -18,8 +18,8 @@ templates = Jinja2Templates(directory="templates/")
 #### -------------------------------------------------------------------------------------------------------
 
 # stocklist
-# @router.get("/{page_number}")
-@router.get("/", response_class=HTMLResponse) 
+@router.get("/list/", response_class=HTMLResponse) 
+@router.get("/list/{page_number}")
 async def stocklist_function(
     request:Request
     ,page_number: Optional[int] = 1
